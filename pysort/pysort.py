@@ -40,7 +40,7 @@ def merge_sort(sample):
 
     return(merge_process(sample))
 
-def heap_sort(heap):
+def heap_sort(sample):
     def max_heapify(heap,i):
         heap_size=len(heap)
         left=2*i+1
@@ -88,9 +88,35 @@ def heap_sort(heap):
         max_heap[0]=temp[0]
         return (max_heap)
         
-    return sort(heap)
+    return sort(sample)
+
+def quick_sort(sample):
+    def partition(unparted,p,r):
+        x=unparted[r]
+        i=p-1
+        j=p 
+        while j<r:
+            if unparted[j]<=x:
+                i+=1
+                temp=unparted[j]
+                unparted[j]=unparted[i]
+                unparted[i]=temp
+            j+=1
+        temp=unparted[r]
+        unparted[r]=unparted[i+1]
+        unparted[i+1]=temp
+        return (i+1)
+
+    def sort(unsorted,p,r):
+        if p<r:
+            q=partition(unsorted,p,r)
+            sort(unsorted,0,q-1)
+            sort(unsorted,q+1,r)
+        return(unsorted)
+    length=len(sample)-1
+    return(sort(sample,0,length))
 
 
 
-print(heap_sort(sample))
+print(quick_sort(sample))
 
