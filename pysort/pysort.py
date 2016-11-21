@@ -116,7 +116,38 @@ def quick_sort(sample):
     length=len(sample)-1
     return(sort(sample,0,length))
 
-
-
-print(quick_sort(sample))
+def counting_sort(sample): 
+    temp=[]
+    temp_result=[]
+    length=len(sample)
+    i,j,max=0,0,0
+    while j<length:
+        if sample[j]>max:
+            max=sample[j]
+        j+=1
+    j=0
+    while i<=max:
+        temp.append(0)
+        temp_result.append(0)
+        i+=1
+    while j<length:
+        temp[sample[j]]+=1
+        j+=1
+    j=1
+    while j<=max:
+        temp[j]=temp[j]+temp[j-1]
+        j+=1
+    j=length-1
+    while j>0:
+        temp_result[temp[sample[j]]]=sample[j]
+        temp[sample[j]]-=1
+        j=j-1
+    j=0
+    result=[]
+    while j<=max:
+        if temp_result[j]!=0:
+            result.append(temp_result[j])
+        j+=1
+    return(result)
+print(counting_sort(sample))
 
